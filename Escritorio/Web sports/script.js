@@ -120,32 +120,6 @@ const plansObserver = new IntersectionObserver(entries => {
 }, iOpts);
 document.querySelectorAll('.reveal-fade').forEach(el => plansObserver.observe(el));
 
-// ============================================================
-// COUNTER ANIMATION
-// ============================================================
-let countersStarted = false;
-const counters = document.querySelectorAll('.count');
-
-const counterObserver = new IntersectionObserver(entries => {
-  if (!entries[0].isIntersecting || countersStarted) return;
-  countersStarted = true;
-  counters.forEach(el => {
-    const target = parseInt(el.dataset.target, 10);
-    const duration = 1600;
-    const step = 16;
-    let current = 0;
-    const inc = target / (duration / step);
-    const t = setInterval(() => {
-      current = Math.min(current + inc, target);
-      el.textContent = Math.floor(current);
-      if (current >= target) clearInterval(t);
-    }, step);
-  });
-  counterObserver.disconnect();
-}, { threshold: 0.6 });
-
-const statsEl = document.querySelector('.hero-stats');
-if (statsEl) counterObserver.observe(statsEl);
 
 // ============================================================
 // CONTACT FORM
@@ -169,74 +143,129 @@ if (form) {
 }
 
 // ============================================================
-// SPRINT LINES — redibujado cíclico de trayectorias GPS
+// SPRINT LINES + GPS WIDGETS — sincronizados
 // ============================================================
 (function initSprints() {
+  const CIRC = 276.46;
+
   const SPRINT_SETS = [
-    // Set 0: Presión derecha
     {
       paths: [
-        'M60,200 Q160,160 300,155 T480,130',
-        'M70,280 Q200,270 340,240 T500,210',
-        'M200,310 Q310,260 400,200 T470,165',
-        'M130,170 Q220,140 310,145 T430,120',
-        'M100,120 Q230,100 330,110 T460,90',
-        'M400,170 Q310,190 200,195 T80,210',
+        'M120,190 Q200,160 300,155',
+        'M180,260 Q280,240 380,230',
+        'M300,300 Q370,260 430,210',
+        'M200,130 Q290,120 380,125',
       ],
-      dots: [[480,130],[500,210],[470,165],[430,120],[460,90],[80,210]],
+      dots: [[300,155],[380,230],[430,210],[380,125]],
       sprints: 14, speed: '34.2',
+      gps: [
+        { val: '9.5',  unit: 'km',   pct: 0.74 },
+        { val: '560',  unit: 'm',    pct: 0.58 },
+        { val: '30.2', unit: 'km/h', pct: 0.84 },
+      ],
     },
-    // Set 1: Control centrocampo
     {
       paths: [
-        'M50,170 Q180,150 280,155 T430,160',
-        'M80,90 Q200,110 310,120 T450,115',
-        'M90,255 Q220,240 330,235 T460,245',
-        'M460,170 Q360,155 260,160 T100,175',
-        'M380,80 Q290,95 200,100 T60,115',
-        'M350,265 Q260,252 170,258 T50,265',
+        'M80,170 Q180,155 290,160',
+        'M100,100 Q210,115 320,120',
+        'M360,240 Q280,235 180,240',
+        'M380,175 Q300,160 210,165',
       ],
-      dots: [[430,160],[450,115],[460,245],[100,175],[60,115],[50,265]],
+      dots: [[290,160],[320,120],[180,240],[210,165]],
       sprints: 9, speed: '31.8',
+      gps: [
+        { val: '11.2', unit: 'km',   pct: 0.88 },
+        { val: '720',  unit: 'm',    pct: 0.75 },
+        { val: '32.1', unit: 'km/h', pct: 0.89 },
+      ],
     },
-    // Set 2: Construcción izquierda
     {
       paths: [
-        'M480,160 Q350,155 210,160 T50,175',
-        'M490,240 Q370,235 240,245 T60,255',
-        'M460,100 Q330,110 200,115 T55,125',
-        'M300,310 Q190,270 110,220 T60,175',
-        'M380,290 Q270,265 170,240 T70,210',
-        'M150,155 Q220,170 320,165 T470,170',
+        'M420,160 Q320,155 210,162',
+        'M440,245 Q330,238 220,242',
+        'M100,130 Q200,118 320,115',
+        'M270,300 Q200,265 140,230',
       ],
-      dots: [[50,175],[60,255],[55,125],[60,175],[70,210],[470,170]],
-      sprints: 7, speed: '29.4',
+      dots: [[210,162],[220,242],[320,115],[140,230]],
+      sprints: 11, speed: '32.6',
+      gps: [
+        { val: '8.7',  unit: 'km',   pct: 0.68 },
+        { val: '480',  unit: 'm',    pct: 0.50 },
+        { val: '28.9', unit: 'km/h', pct: 0.80 },
+      ],
     },
-    // Set 3: Presión alta
     {
       paths: [
-        'M55,130 Q190,110 330,100 T490,95',
-        'M60,220 Q180,200 310,195 T480,185',
-        'M100,305 Q240,275 360,240 T490,220',
-        'M160,80 Q270,95 370,90 T490,85',
-        'M70,175 Q210,160 340,170 T480,165',
-        'M200,285 Q310,260 410,240 T500,235',
+        'M70,130 Q190,115 310,108',
+        'M80,220 Q200,205 320,200',
+        'M160,290 Q260,265 370,245',
+        'M390,170 Q300,160 200,158',
       ],
-      dots: [[490,95],[480,185],[490,220],[490,85],[480,165],[500,235]],
+      dots: [[310,108],[320,200],[370,245],[200,158]],
       sprints: 16, speed: '35.7',
+      gps: [
+        { val: '10.4', unit: 'km',   pct: 0.81 },
+        { val: '640',  unit: 'm',    pct: 0.66 },
+        { val: '31.5', unit: 'km/h', pct: 0.87 },
+      ],
     },
   ];
 
-  const spIds   = ['sp1','sp2','sp3','sp4','sp5','sp6'];
-  const dotIds  = ['sp1-dot','sp2-dot','sp3-dot','sp4-dot','sp5-dot','sp6-dot'];
+  function updateGpsWidgets(s) {
+    s.gps.forEach((d, i) => {
+      const w = document.getElementById('gw-' + i);
+      if (!w) return;
+      const fill = w.querySelector('.gps-ring-fill');
+      const val  = w.querySelector('.gps-val');
+      const unit = w.querySelector('.gps-unit');
+      val.classList.add('fade');
+      setTimeout(() => {
+        val.textContent  = d.val;
+        unit.textContent = d.unit;
+        fill.style.strokeDashoffset = CIRC * (1 - d.pct);
+        val.classList.remove('fade');
+      }, 260);
+    });
+  }
+
+  // Set initial GPS ring fills
+  SPRINT_SETS[0].gps.forEach((d, i) => {
+    const w = document.getElementById('gw-' + i);
+    if (!w) return;
+    w.querySelector('.gps-ring-fill').style.strokeDashoffset = CIRC * (1 - d.pct);
+  });
+
+  // Only use 4 path/dot elements (sp1–sp4), hide sp5/sp6
+  const spIds  = ['sp1','sp2','sp3','sp4'];
+  const dotIds = ['sp1-dot','sp2-dot','sp3-dot','sp4-dot'];
+
+  // Hide unused lines
+  ['sp5','sp6','sp5-dot','sp6-dot'].forEach(id => {
+    const el = document.getElementById(id);
+    if (el) el.style.display = 'none';
+  });
+
   const sprintsEl = document.getElementById('sprints');
   const speedEl   = document.getElementById('speed');
   let setIdx = 0;
 
-  function applySet(s) {
+  function getPathLength(el) {
+    try { return el.getTotalLength(); } catch(e) { return 200; }
+  }
+
+  function drawSet(s) {
     spIds.forEach((id, i) => {
       const el = document.getElementById(id);
-      if (el) el.setAttribute('d', s.paths[i]);
+      if (!el) return;
+      el.setAttribute('d', s.paths[i]);
+      const len = getPathLength(el);
+      el.style.transition = 'none';
+      el.style.strokeDasharray  = len;
+      el.style.strokeDashoffset = len;
+      // force reflow then animate draw
+      void el.getBoundingClientRect();
+      el.style.transition = `stroke-dashoffset ${0.9 + i * 0.15}s cubic-bezier(0.4,0,0.2,1) ${i * 0.12}s`;
+      el.style.strokeDashoffset = '0';
     });
     dotIds.forEach((id, i) => {
       const el = document.getElementById(id);
@@ -256,17 +285,12 @@ if (form) {
     }
   }
 
-  // Redibuja cada 5s: reset animación + nuevo set de paths
+  drawSet(SPRINT_SETS[0]);
+
   setInterval(() => {
     setIdx = (setIdx + 1) % SPRINT_SETS.length;
     const s = SPRINT_SETS[setIdx];
-    spIds.forEach(id => {
-      const el = document.getElementById(id);
-      if (!el) return;
-      el.style.animation = 'none';
-      void el.offsetWidth; // reflow
-      el.style.animation = '';
-    });
-    applySet(s);
+    drawSet(s);
+    updateGpsWidgets(s);
   }, 5000);
 })();
