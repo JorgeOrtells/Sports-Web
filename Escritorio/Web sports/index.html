@@ -1,0 +1,563 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Futbol Eleven — Preparación Física de Élite | GPS & Fuerza</title>
+  <meta name="description"
+    content="Potencia tu rendimiento físico en el fútbol con tecnología GPS de precisión y entrenamiento de fuerza especializado. Para jugadores y clubs de élite." />
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Anton&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,700;1,9..40,400&display=swap"
+    rel="stylesheet" />
+  <!-- Favicon placeholder -->
+  <link rel="icon" type="image/png" href="img/favicon.png">
+</head>
+
+<body class="dark-theme">
+
+  <!-- NAVBAR: Diseño minimalista y funcional -->
+  <nav class="navbar" id="navbar">
+    <div class="nav-inner container">
+      <a href="#inicio" class="nav-logo">FUTBOL<span class="orange-text">ELEVEN</span></a>
+      <ul class="nav-links" id="navLinks">
+        <li><a href="#servicios">Servicios</a></li>
+        <li><a href="#quienes">Equipo</a></li>
+        <li><a href="#precios">Planes</a></li>
+        <li><a href="#contacto">Contacto</a></li>
+        <li class="nav-cta-mobile"><a href="#contacto" class="btn-nav orange-bg">Solicitar Demo</a></li>
+      </ul>
+      <a href="#contacto" class="btn-nav desktop-only orange-bg">Solicitar Demo</a>
+      <button class="hamburger" id="hamburger" aria-label="Abrir Menú de Navegación" aria-expanded="false"
+        aria-controls="navLinks">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- HERO: Impacto inmediato con enfoque tecnológico -->
+  <section class="hero" id="inicio">
+    <div class="hero-noise"></div>
+    <div class="hero-inner container">
+
+      <div class="hero-left">
+        <p class="hero-eyebrow reveal-fade">Performance & Technology</p>
+        <h1 class="hero-title">
+          <span class="line-wrap"><span class="line-inner orange-text" data-delay="0">ELEVA TU JUEGO</span></span>
+          <span class="line-wrap"><span class="line-inner" data-delay="80">AL <em>MÁXIMO</em></span></span>
+          <span class="line-wrap"><span class="line-inner" data-delay="160">NIVEL FÍSICO</span></span>
+        </h1>
+        <p class="hero-sub reveal-fade" data-delay="300">Dominamos la ciencia del deporte. Integramos tecnología GPS de
+          vanguardia y entrenamiento de fuerza especializado para futbolistas ambiciosos.</p>
+        <div class="hero-actions reveal-fade" data-delay="400">
+          <a href="#servicios" class="btn-primary orange-bg">Descubrir Servicios</a>
+          <a href="#contacto" class="btn-outline">Hablar con un Experto</a>
+        </div>
+        <div class="hero-stats reveal-fade" data-delay="500">
+          <div class="hstat">
+            <strong class="orange-text"><span class="count" data-target="250">0</span>+</strong>
+            <span>Jugadores Monitorizados</span>
+          </div>
+          <div class="hstat-sep"></div>
+          <div class="hstat">
+            <strong class="orange-text"><span class="count" data-target="18">0</span>+</strong>
+            <span>Clubs Partners</span>
+          </div>
+          <div class="hstat-sep"></div>
+          <div class="hstat">
+            <strong class="orange-text"><span class="count" data-target="10">0</span>+</strong>
+            <span>Años de Experiencia</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="hero-right reveal-fade" data-delay="300">
+        <div class="field-wrap">
+          <svg class="pitch-svg" viewBox="0 0 520 340" xmlns="http://www.w3.org/2000/svg"
+            aria-label="Mapa de calor de rendimiento en campo de fútbol">
+            <defs>
+              <radialGradient id="hg1">
+                <stop offset="0%"   stop-color="#FF4500" stop-opacity="0.92"/>
+                <stop offset="55%"  stop-color="#FF5722" stop-opacity="0.48"/>
+                <stop offset="100%" stop-color="#FF5722" stop-opacity="0"/>
+              </radialGradient>
+              <radialGradient id="hg2">
+                <stop offset="0%"   stop-color="#FF9800" stop-opacity="0.85"/>
+                <stop offset="55%"  stop-color="#FF9800" stop-opacity="0.38"/>
+                <stop offset="100%" stop-color="#FF9800" stop-opacity="0"/>
+              </radialGradient>
+              <radialGradient id="hg3">
+                <stop offset="0%"   stop-color="#FFCA28" stop-opacity="0.72"/>
+                <stop offset="55%"  stop-color="#FFC107" stop-opacity="0.28"/>
+                <stop offset="100%" stop-color="#FFC107" stop-opacity="0"/>
+              </radialGradient>
+            </defs>
+
+            <!-- Fondo azul marino -->
+            <rect width="520" height="340" rx="6" fill="#0A1628"/>
+
+            <!-- Líneas del campo -->
+            <g stroke="rgba(130,180,255,0.22)" stroke-width="1.2" fill="none">
+              <rect x="8" y="8" width="504" height="324" rx="2"/>
+              <line x1="260" y1="8" x2="260" y2="332"/>
+              <circle cx="260" cy="170" r="50"/>
+              <circle cx="260" cy="170" r="2.5" fill="rgba(130,180,255,0.45)" stroke="none"/>
+              <rect x="8" y="88" width="88" height="164"/>
+              <rect x="8" y="126" width="32" height="88"/>
+              <circle cx="74" cy="170" r="2" fill="rgba(130,180,255,0.45)" stroke="none"/>
+              <path d="M96 118 Q133 170 96 222"/>
+              <rect x="424" y="88" width="88" height="164"/>
+              <rect x="480" y="126" width="32" height="88"/>
+              <circle cx="446" cy="170" r="2" fill="rgba(130,180,255,0.45)" stroke="none"/>
+              <path d="M424 118 Q387 170 424 222"/>
+              <path d="M8 18 Q18 8 28 18"/>
+              <path d="M512 18 Q502 8 492 18"/>
+              <path d="M8 322 Q18 332 28 322"/>
+              <path d="M512 322 Q502 332 492 322"/>
+            </g>
+
+            <!-- Líneas de sprint GPS animadas -->
+            <g id="sprint-lines" fill="none" stroke-linecap="round">
+              <!-- Jugador 1 — sprint diagonal derecho -->
+              <path id="sp1" d="M60,200 Q160,160 300,155 T480,130"
+                stroke="#FF5722" stroke-width="2.2" stroke-dasharray="8 5" opacity="0.85"/>
+              <circle id="sp1-dot" cx="480" cy="130" r="4.5" fill="#FF5722"/>
+              <!-- Jugador 2 — carrera por banda derecha -->
+              <path id="sp2" d="M70,280 Q200,270 340,240 T500,210"
+                stroke="#FF9800" stroke-width="2" stroke-dasharray="8 5" opacity="0.75"/>
+              <circle id="sp2-dot" cx="500" cy="210" r="4" fill="#FF9800"/>
+              <!-- Jugador 3 — diagonal al área -->
+              <path id="sp3" d="M200,310 Q310,260 400,200 T470,165"
+                stroke="#FF5722" stroke-width="1.8" stroke-dasharray="8 5" opacity="0.7"/>
+              <circle id="sp3-dot" cx="470" cy="165" r="3.5" fill="#FF5722"/>
+              <!-- Jugador 4 — centrocampista, pase y desmarcada -->
+              <path id="sp4" d="M130,170 Q220,140 310,145 T430,120"
+                stroke="#FFCA28" stroke-width="1.6" stroke-dasharray="6 5" opacity="0.65"/>
+              <circle id="sp4-dot" cx="430" cy="120" r="3.5" fill="#FFCA28"/>
+              <!-- Jugador 5 — segunda línea -->
+              <path id="sp5" d="M100,120 Q230,100 330,110 T460,90"
+                stroke="#FF9800" stroke-width="1.5" stroke-dasharray="6 5" opacity="0.55"/>
+              <circle id="sp5-dot" cx="460" cy="90" r="3" fill="#FF9800"/>
+              <!-- Jugador 6 — repliegue desde media -->
+              <path id="sp6" d="M400,170 Q310,190 200,195 T80,210"
+                stroke="#FF7043" stroke-width="1.6" stroke-dasharray="5 6" opacity="0.5"/>
+              <circle id="sp6-dot" cx="80" cy="210" r="3" fill="#FF7043"/>
+            </g>
+
+            <!-- Puntos de calor suaves en zonas de actividad alta -->
+            <ellipse cx="455" cy="148" rx="50" ry="38" fill="url(#hg1)" opacity="0.45"/>
+            <ellipse cx="340" cy="160" rx="42" ry="32" fill="url(#hg2)" opacity="0.35"/>
+            <ellipse cx="200" cy="240" rx="38" ry="28" fill="url(#hg3)" opacity="0.28"/>
+          </svg>
+
+          <div class="field-label">
+            <span class="fl-dot"></span>
+            <span>Live GPS Tracking</span>
+          </div>
+          <div class="field-stats">
+            <div class="fs-item">
+              <span class="fs-val" id="sprints">14</span>
+              <span>Sprints &gt;25km/h</span>
+            </div>
+            <div class="fs-sep"></div>
+            <div class="fs-item">
+              <span class="fs-val" id="speed">34.2</span>
+              <span>km/h Máx.</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+    <a href="#servicios" class="scroll-hint" aria-label="Ir a la sección de servicios">
+      <div class="sh-line"></div>
+      <span>descubrir</span>
+    </a>
+  </section>
+
+  <!-- SERVICIOS: Claridad y enfoque en beneficios -->
+  <section class="section" id="servicios">
+    <div class="container">
+
+      <div class="section-intro">
+        <span class="tag orange-text reveal-fade">Nuestra Propuesta de Valor</span>
+        <h2 class="display-title">
+          <span class="line-wrap"><span class="line-inner">Tecnología y Ciencia al servicio</span></span>
+          <span class="line-wrap"><span class="line-inner">de tu <em class="orange-text">rendimiento</em></span></span>
+        </h2>
+        <p class="section-sub reveal-fade">Dos pilares fundamentales y especializados para maximizar tu potencial físico
+          en el campo.</p>
+      </div>
+
+      <!-- Servicio 1: GPS -->
+      <div class="service-block reveal-line orange-border-hover">
+        <div class="sb-left">
+          <span class="sb-num orange-text">01</span>
+          <div class="sb-title-group">
+            <h3>Seguimiento GPS de Élite</h3>
+            <span class="sb-subtitle">Player Tracking Technology</span>
+          </div>
+          <!-- Icono placeholder -->
+          <div class="sb-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="#FF5722" stroke-width="1.5">
+              <path d="M12 2a10 10 0 100 20 10 10 0 000-20zM12 6v6l4 2" />
+            </svg>
+          </div>
+        </div>
+        <div class="sb-right">
+          <p>Monitorización integral de la carga de trabajo. Utilizamos tecnología GPS de precisión centimétrica para
+            analizar cada movimiento en entrenamientos y partidos. Obtén datos en tiempo real para optimizar esfuerzos y
+            prevenir fatiga.</p>
+          <div class="sb-tags">
+            <span>Análisis Táctico-Físico</span>
+            <span>Métricas de Alta Intensidad</span>
+            <span>Mapas de Calor Pro</span>
+            <span>Alertas de Carga de Trabajo</span>
+            <span>Informes de Progresión</span>
+          </div>
+          <a href="#precios" class="link-arrow orange-text">Explorar Planes GPS <svg viewBox="0 0 20 20" fill="none">
+              <path d="M4 10h12M12 6l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"
+                stroke-linejoin="round" />
+            </svg></a>
+        </div>
+      </div>
+
+      <!-- Servicio 2: Fuerza -->
+      <div class="service-block reveal-line gold-block gold-border-hover">
+        <div class="sb-left">
+          <span class="sb-num gold-text">02</span>
+          <div class="sb-title-group">
+            <h3>Entrenamiento de Fuerza Especializado</h3>
+            <span class="sb-subtitle">Strength &amp; Conditioning for Football</span>
+          </div>
+          <!-- Icono placeholder -->
+          <div class="sb-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="#FFB800" stroke-width="1.5">
+              <path d="M6 12h12M3 8v8M21 8v8M9 6v12M15 6v12" />
+            </svg>
+          </div>
+        </div>
+        <div class="sb-right">
+          <p>Programación de fuerza optimizada para las demandas del fútbol moderno. Adaptamos las cargas según el
+            perfil biomecánico del jugador y el calendario competitivo. Enfoque directo en la potencia explosiva y la
+            prevención activa de lesiones.</p>
+          <div class="sb-tags">
+            <span class="gold-chip">Fuerza Explosiva & Potencia</span>
+            <span class="gold-chip">Periodización Táctica Integrada</span>
+            <span class="gold-chip">Prevención de Lesiones (RTP)</span>
+            <span class="gold-chip">Test de Valoración Monthly</span>
+          </div>
+          <a href="#precios" class="link-arrow gold-text">Explorar Planes Fuerza <svg viewBox="0 0 20 20" fill="none">
+              <path d="M4 10h12M12 6l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"
+                stroke-linejoin="round" />
+            </svg></a>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- QUIÉNES SOMOS: Sección de equipo más profesional -->
+  <section class="section team-section" id="quienes">
+    <div class="container">
+
+      <div class="section-intro center">
+        <span class="tag orange-text reveal-fade">Liderazgo y Experiencia</span>
+        <h2 class="display-title">
+          <span class="line-wrap"><span class="line-inner">Profesionales del</span></span>
+          <span class="line-wrap"><span class="line-inner"><em class="orange-text">Alto Rendimiento</em></span></span>
+        </h2>
+      </div>
+
+      <!-- Miembro 1: GPS -->
+      <div class="team-member reveal-fade">
+        <div class="tm-photo-col">
+          <div class="tm-photo-frame orange-frame">
+            <img src="img/preparador-gps.jpg"
+              alt="[Nombre del Preparador GPS], Especialista en Análisis de Rendimiento GPS"
+              onerror="this.style.display='none'" />
+            <div class="tm-photo-ph orange-bg-soft">
+              <svg viewBox="0 0 100 100" fill="none">
+                <circle cx="50" cy="38" r="20" stroke="#FF5722" stroke-width="1.2" />
+                <path d="M12 88 Q12 62 50 62 Q88 62 88 88" stroke="#FF5722" stroke-width="1.2" fill="none" />
+              </svg>
+              <p class="orange-text">Foto del Profesional</p>
+            </div>
+          </div>
+        </div>
+        <div class="tm-info-col">
+          <p class="tm-role orange-text">Preparador Físico & Analista GPS Principal</p>
+          <h3 class="tm-name">[Nombre del Profesional]</h3>
+          <p class="tm-bio">Máster en Rendimiento Deportivo (INEF). Certificado avanzado en tecnología Catapult Sports.
+            Especialista en optimizar la carga de entrenamiento y competición en el fútbol profesional con más de 8 años
+            de experiencia en clubs de LALIGA.</p>
+          <div class="tm-chips">
+            <span>GPS Big Data</span>
+            <span>Carga de Entrenamiento</span>
+            <span>Prevención de Fatiga</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Miembro 2: Fuerza -->
+      <div class="team-member reveal-fade reverse">
+        <div class="tm-photo-col">
+          <div class="tm-photo-frame gold-frame">
+            <img src="img/coach-fuerza.jpg" alt="[Nombre del Coach de Fuerza], Especialista en Strength & Conditioning"
+              onerror="this.style.display='none'" />
+            <div class="tm-photo-ph gold-bg-soft">
+              <svg viewBox="0 0 100 100" fill="none">
+                <circle cx="50" cy="38" r="20" stroke="#FFB800" stroke-width="1.2" />
+                <path d="M12 88 Q12 62 50 62 Q88 62 88 88" stroke="#FFB800" stroke-width="1.2" fill="none" />
+              </svg>
+              <p class="gold-text">Foto del Profesional</p>
+            </div>
+          </div>
+        </div>
+        <div class="tm-info-col">
+          <p class="tm-role gold-text">Especialista en Fuerza & Acondicionamiento (S&C)</p>
+          <h3 class="tm-name">[Nombre del Profesional]</h3>
+          <p class="tm-bio">Certificado NSCA-CSCS. Grado en Ciencias del Deporte (UPM). Experto en el desarrollo de
+            potencia explosiva y periodización táctica integrada. Centrado en la aplicación práctica de la fuerza para
+            la mejora del rendimiento en el campo y la reducción del riesgo de lesiones.</p>
+          <div class="tm-chips">
+            <span class="gold-chip">Potencia Explosiva</span>
+            <span class="gold-chip">Biomecánica del Fútbol</span>
+            <span class="gold-chip">Recuperación Funcional</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- PRECIOS: Tabla más persuasiva y clara -->
+  <section class="section pricing-section" id="precios">
+    <div class="container">
+
+      <div class="section-intro center">
+        <span class="tag orange-text reveal-fade">Planes de Inversión</span>
+        <h2 class="display-title">
+          <span class="line-wrap"><span class="line-inner">Elige tu nivel de</span></span>
+          <span class="line-wrap"><span class="line-inner"><em class="orange-text">Acompañamiento</em></span></span>
+        </h2>
+      </div>
+
+      <div class="plans reveal-fade">
+
+        <div class="plan-row plan-labels">
+          <div class="pc plan">Plan / Enfoque</div>
+          <div class="pc price">Inversión Mensual</div>
+          <div class="pc features">Servicios Incluidos</div>
+          <div class="pc cta">Acción</div>
+        </div>
+
+        <!-- Plan Starter -->
+        <div class="plan-row orange-border-hover">
+          <div class="pc plan">
+            <strong>Starter</strong>
+            <span>GPS Individual</span>
+          </div>
+          <div class="pc price">
+            <strong class="orange-text">149€</strong><span>+IVA /mes</span>
+          </div>
+          <div class="pc features">
+            <ul>
+              <li>Dispositivo GPS Completo</li>
+              <li>Acceso a Dashboard Online</li>
+              <li>Informes Semanales PDF</li>
+              <li>Soporte Técnico Básico</li>
+              <li><em>Para 1 Jugador</em></li>
+            </ul>
+          </div>
+          <div class="pc cta">
+            <a href="#contacto" class="btn-plan">Empezar Ahora</a>
+          </div>
+        </div>
+
+        <!-- Plan Pro (Destacado) -->
+        <div class="plan-row featured orange-bg-dark orange-border">
+          <div class="pc plan">
+            <span class="plan-badge orange-bg">Más Popular - Alto Rendimiento</span>
+            <strong>Pro</strong>
+            <span>GPS + Fuerza</span>
+          </div>
+          <div class="pc price">
+            <strong class="orange-text">299€</strong><span>+IVA /mes</span>
+          </div>
+          <div class="pc features">
+            <ul>
+              <li><strong>Todo el Plan Starter</strong></li>
+              <li>Informes Diarios Post-Sesión</li>
+              <li>Plan de Fuerza Personalizado</li>
+              <li>Seguimiento de Cargas de Fuerza</li>
+              <li>1 Sesión Online Monthly con Coach</li>
+              <li><em>Para hasta 3 Jugadores</em></li>
+            </ul>
+          </div>
+          <div class="pc cta">
+            <a href="#contacto" class="btn-plan primary orange-bg">Elegir Plan Pro</a>
+          </div>
+        </div>
+
+        <!-- Plan Elite -->
+        <div class="plan-row gold-border-hover">
+          <div class="pc plan">
+            <strong>Elite Club</strong>
+            <span>Solución Integral Equipo</span>
+          </div>
+          <div class="pc price">
+            <strong class="gold-text">499€</strong><span>+IVA /mes</span>
+          </div>
+          <div class="pc features">
+            <ul>
+              <li><strong>Todo el Plan Pro</strong></li>
+              <li>Dashboard de Equipo Completo</li>
+              <li>Análisis Táctico-Físico Grupal</li>
+              <li>Informes Especiales para Staff</li>
+              <li>Consultoría Presencial (2/mes)</li>
+              <li>Soporte Premium 24/7</li>
+              <li><em>Para 11+ Jugadores</em></li>
+            </ul>
+          </div>
+          <div class="pc cta">
+            <a href="#contacto" class="btn-plan gold-btn">Contactar Staff</a>
+          </div>
+        </div>
+
+      </div>
+
+      <p class="pricing-note reveal-fade">¿Necesitas una solución a medida para tu Academia o Club? <a href="#contacto"
+          class="orange-text">Hablemos y diseñamos tu plan.</a></p>
+
+    </div>
+  </section>
+
+  <!-- CONTACTO: Formulario moderno y directo -->
+  <section class="section contact-section" id="contacto">
+    <div class="container">
+
+      <div class="contact-grid">
+        <div class="contact-left">
+          <span class="tag orange-text reveal-fade">Impulsa tu Carrera</span>
+          <h2 class="display-title left">
+            <span class="line-wrap"><span class="line-inner">Lleva tu fútbol</span></span>
+            <span class="line-wrap"><span class="line-inner">al <em class="orange-text">siguiente</em></span></span>
+            <span class="line-wrap"><span class="line-inner">nivel técnico-físico</span></span>
+          </h2>
+          <p class="reveal-fade">Cuéntanos tus objetivos o las necesidades de tu equipo. Te prepararemos una propuesta
+            de alto rendimiento personalizada en menos de 24 horas.</p>
+          <div class="contact-details reveal-fade">
+            <div class="cd orange-border-left">
+              <span class="cd-label orange-text">Email</span>
+              <a href="mailto:info@futboleleven.es">info@futboleleven.es</a>
+            </div>
+            <div class="cd orange-border-left">
+              <span class="cd-label orange-text">Teléfono / WhatsApp</span>
+              <a href="tel:+34600000000">+34 600 000 000</a>
+            </div>
+          </div>
+        </div>
+        <div class="contact-right reveal-fade" data-delay="200">
+          <form id="contactForm" class="contact-form">
+            <div class="form-row-2">
+              <div class="field">
+                <label for="name">Nombre Completo</label>
+                <input type="text" id="name" name="name" placeholder="Ej. Juan Pérez" required />
+              </div>
+              <div class="field">
+                <label for="email">Email Profesional</label>
+                <input type="email" id="email" name="email" placeholder="ejemplo@email.com" required />
+              </div>
+            </div>
+            <div class="field">
+              <label for="interest">Servicio o Plan de Interés</label>
+              <select id="interest" name="interest" required>
+                <option value="" disabled selected>Selecciona una opción...</option>
+                <option value="gps">Seguimiento GPS Individual</option>
+                <option value="fuerza">Entrenamiento de Fuerza</option>
+                <option value="pro">Plan Pro (GPS + Fuerza)</option>
+                <option value="elite">Plan Elite (Equipo)</option>
+                <option value="consultoria">Consultoría Personalizada</option>
+              </select>
+            </div>
+            <div class="field">
+              <label for="message">Mensaje / Objetivos</label>
+              <textarea id="message" name="message" rows="5"
+                placeholder="Cuéntanos brevemente sobre ti, tu equipo o tus metas físicas..."></textarea>
+            </div>
+            <button type="submit" class="btn-primary orange-bg full-width">Enviar Solicitud de Información</button>
+            <p class="form-note center">Te responderemos con una propuesta en menos de 24h.</p>
+          </form>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- FOOTER: Profesional y completo -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-inner">
+        <div class="footer-brand">
+          <p class="footer-logo">FUTBOL<span class="orange-text">ELEVEN</span></p>
+          <p class="footer-tagline">Preparación física de élite y tecnología para futbolistas exigentes.</p>
+        </div>
+        <nav class="footer-nav" aria-label="Navegación de pie de página">
+          <div class="fn-col">
+            <h4>Explorar</h4>
+            <a href="#servicios">Servicios</a>
+            <a href="#quienes">El Equipo</a>
+            <a href="#precios">Planes Pro</a>
+          </div>
+          <div class="fn-col">
+            <h4>Soporte</h4>
+            <a href="#contacto">Contacto</a>
+            <a href="#">Preguntas Frecuentes</a>
+            <a href="#">Demo Online</a>
+          </div>
+          <div class="fn-col">
+            <h4>Legal</h4>
+            <a href="#">Aviso Legal</a>
+            <a href="#">Política de Privacidad</a>
+            <a href="#">Cookies</a>
+          </div>
+        </nav>
+        <div class="footer-social">
+          <h4>Síguenos</h4>
+          <div class="fs-links">
+            <a href="#" aria-label="Instagram de Futbol Eleven" class="orange-hover">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                <rect x="2" y="2" width="20" height="20" rx="5" />
+                <circle cx="12" cy="12" r="5" />
+                <circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none" />
+              </svg>
+            </a>
+            <a href="#" aria-label="Twitter / X de Futbol Eleven" class="orange-hover">
+              <svg viewBox="0 0 24 24" fill="currentColor">
+                <path
+                  d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
+              </svg>
+            </a>
+            <a href="#" aria-label="LinkedIn de Futbol Eleven" class="orange-hover">
+              <svg viewBox="0 0 24 24" fill="currentColor">
+                <path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-4 0v7h-4v-7a6 6 0 016-6zM2 9h4v12H2z" />
+                <circle cx="4" cy="4" r="2" />
+              </svg>
+            </a>
+          </div>
+        </div>
+      </div>
+      <div class="footer-bottom center">
+        <p>© 2026 Futbol Eleven Pro Performance S.L. Todos los derechos reservados.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+
+</html>
