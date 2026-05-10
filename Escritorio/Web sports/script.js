@@ -126,19 +126,48 @@ document.querySelectorAll('.reveal-fade').forEach(el => plansObserver.observe(el
 // ============================================================
 const form = document.getElementById('contactForm');
 if (form) {
-  form.addEventListener('submit', e => {
+  form.addEventListener('submit', async e => {
     e.preventDefault();
     const btn = form.querySelector('button[type="submit"]');
     const original = btn.textContent;
-    btn.textContent = 'Mensaje enviado';
-    btn.style.background = '#16a34a';
+    btn.textContent = 'Enviando...';
     btn.disabled = true;
-    setTimeout(() => {
-      btn.textContent = original;
-      btn.style.background = '';
-      btn.disabled = false;
-      form.reset();
-    }, 3500);
+
+    const data = {
+      name:     form.name.value,
+      email:    form.email.value,
+      interest: form.interest.value,
+      message:  form.message.value,
+    };
+
+    try {
+      const res = await fetch('https://formspree.io/f/mwvoglow', {
+        method:  'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body:    JSON.stringify(data),
+      });
+
+      if (res.ok) {
+        btn.textContent = '✓ Solicitud enviada';
+        btn.style.background = '#16a34a';
+        form.reset();
+        setTimeout(() => {
+          btn.textContent = original;
+          btn.style.background = '';
+          btn.disabled = false;
+        }, 4000);
+      } else {
+        throw new Error();
+      }
+    } catch {
+      btn.textContent = 'Error — inténtalo de nuevo';
+      btn.style.background = '#dc2626';
+      setTimeout(() => {
+        btn.textContent = original;
+        btn.style.background = '';
+        btn.disabled = false;
+      }, 3500);
+    }
   });
 }
 
@@ -148,15 +177,14 @@ if (form) {
 (function initSprints() {
   const CIRC = 276.46;
 
+  // 3 rutas por set (una por trayectoria)
   const SPRINT_SETS = [
     {
       paths: [
         'M120,190 Q200,160 300,155',
         'M180,260 Q280,240 380,230',
         'M300,300 Q370,260 430,210',
-        'M200,130 Q290,120 380,125',
       ],
-      dots: [[300,155],[380,230],[430,210],[380,125]],
       sprints: 14, speed: '34.2',
       gps: [
         { val: '9.5',  unit: 'km',   pct: 0.74 },
@@ -169,9 +197,7 @@ if (form) {
         'M80,170 Q180,155 290,160',
         'M100,100 Q210,115 320,120',
         'M360,240 Q280,235 180,240',
-        'M380,175 Q300,160 210,165',
       ],
-      dots: [[290,160],[320,120],[180,240],[210,165]],
       sprints: 9, speed: '31.8',
       gps: [
         { val: '11.2', unit: 'km',   pct: 0.88 },
@@ -184,9 +210,7 @@ if (form) {
         'M420,160 Q320,155 210,162',
         'M440,245 Q330,238 220,242',
         'M100,130 Q200,118 320,115',
-        'M270,300 Q200,265 140,230',
       ],
-      dots: [[210,162],[220,242],[320,115],[140,230]],
       sprints: 11, speed: '32.6',
       gps: [
         { val: '8.7',  unit: 'km',   pct: 0.68 },
@@ -199,9 +223,7 @@ if (form) {
         'M70,130 Q190,115 310,108',
         'M80,220 Q200,205 320,200',
         'M160,290 Q260,265 370,245',
-        'M390,170 Q300,160 200,158',
       ],
-      dots: [[310,108],[320,200],[370,245],[200,158]],
       sprints: 16, speed: '35.7',
       gps: [
         { val: '10.4', unit: 'km',   pct: 0.81 },
@@ -228,57 +250,92 @@ if (form) {
     });
   }
 
-  // Set initial GPS ring fills
   SPRINT_SETS[0].gps.forEach((d, i) => {
     const w = document.getElementById('gw-' + i);
     if (!w) return;
     w.querySelector('.gps-ring-fill').style.strokeDashoffset = CIRC * (1 - d.pct);
   });
 
-  // Only use 4 path/dot elements (sp1–sp4), hide sp5/sp6
-  const spIds  = ['sp1','sp2','sp3','sp4'];
-  const dotIds = ['sp1-dot','sp2-dot','sp3-dot','sp4-dot'];
+  // --- Configuración de trayectorias ---
+  const NS      = 'http://www.w3.org/2000/svg';
+  const group   = document.getElementById('sprint-lines');
+  // Vaciar paths estáticos del HTML
+  while (group.firstChild) group.removeChild(group.firstChild);
 
-  // Hide unused lines
-  ['sp5','sp6','sp5-dot','sp6-dot'].forEach(id => {
-    const el = document.getElementById(id);
-    if (el) el.style.display = 'none';
-  });
+  const COLORS      = ['#FF5722', '#FF9800', '#FFCA28'];
+  const WIDTHS      = [2.2, 2.0, 1.8];
+  const DURATIONS   = [2.5, 3.3, 4.1];   // velocidades distintas
+  const BASE_DELAYS = [0,   1.5, 3.0];    // arranques escalonados
+
+  // 3 capas por trayectoria: cabeza, cola media, cola lejana
+  // lagFactor: fracción del ciclo que esta capa va detrás de la cabeza
+  const LAYERS = [
+    { trail: 32,  opacity: 0.92, wMul: 1.00, lagFactor: 0.00 },
+    { trail: 75,  opacity: 0.28, wMul: 0.70, lagFactor: 0.16 },
+    { trail: 130, opacity: 0.09, wMul: 0.50, lagFactor: 0.38 },
+  ];
+
+  // Keyframes dinámicos (un @keyframes por trayectoria con el toVal exacto)
+  const kfEl = document.createElement('style');
+  document.head.appendChild(kfEl);
+
+  function upsertKeyframe(name, toVal) {
+    const sheet = kfEl.sheet;
+    for (let i = 0; i < sheet.cssRules.length; i++) {
+      if (sheet.cssRules[i].name === name) { sheet.deleteRule(i); break; }
+    }
+    sheet.insertRule(
+      `@keyframes ${name}{from{stroke-dashoffset:0}to{stroke-dashoffset:${toVal}}}`, 0
+    );
+  }
+
+  // Crear 3 trayectorias × 3 capas = 9 paths en el DOM
+  const trajectories = COLORS.map((color, ti) =>
+    LAYERS.map(({ trail, opacity, wMul }) => {
+      const p = document.createElementNS(NS, 'path');
+      p.setAttribute('fill', 'none');
+      p.setAttribute('stroke', color);
+      p.setAttribute('stroke-linecap', 'round');
+      p.setAttribute('stroke-width', (WIDTHS[ti] * wMul).toFixed(1));
+      p.setAttribute('opacity', opacity);
+      group.appendChild(p);
+      return p;
+    })
+  );
+
+  function getLen(el) { try { return el.getTotalLength(); } catch(e) { return 220; } }
 
   const sprintsEl = document.getElementById('sprints');
   const speedEl   = document.getElementById('speed');
   let setIdx = 0;
 
-  function getPathLength(el) {
-    try { return el.getTotalLength(); } catch(e) { return 200; }
-  }
-
   function drawSet(s) {
-    spIds.forEach((id, i) => {
-      const el = document.getElementById(id);
-      if (!el) return;
-      el.setAttribute('d', s.paths[i]);
-      const len = getPathLength(el);
-      el.style.transition = 'none';
-      el.style.strokeDasharray  = len;
-      el.style.strokeDashoffset = len;
-      // force reflow then animate draw
-      void el.getBoundingClientRect();
-      el.style.transition = `stroke-dashoffset ${0.9 + i * 0.15}s cubic-bezier(0.4,0,0.2,1) ${i * 0.12}s`;
-      el.style.strokeDashoffset = '0';
+    trajectories.forEach((traj, ti) => {
+      const dur  = DURATIONS[ti];
+      const base = BASE_DELAYS[ti];
+
+      traj.forEach(el => el.setAttribute('d', s.paths[ti]));
+      const len   = getLen(traj[0]);
+      const toVal = -(len + 40);
+      const kf    = `trail-t${ti}`;
+      upsertKeyframe(kf, toVal);
+
+      // Para cada capa: retraso positivo respecto a la cabeza → la cola va detrás
+      traj.forEach(el => { el.style.animation = 'none'; });
+      void traj[0].getBoundingClientRect();
+      traj.forEach((el, li) => {
+        el.style.strokeDasharray = `${LAYERS[li].trail} 9999`;
+        const delay = base - dur / 2 + LAYERS[li].lagFactor * dur;
+        el.style.animation = `${kf} ${dur}s linear ${delay}s infinite`;
+      });
     });
-    dotIds.forEach((id, i) => {
-      const el = document.getElementById(id);
-      if (!el) return;
-      el.setAttribute('cx', s.dots[i][0]);
-      el.setAttribute('cy', s.dots[i][1]);
-    });
+
     if (sprintsEl && speedEl) {
       sprintsEl.style.opacity = '0';
       speedEl.style.opacity   = '0';
       setTimeout(() => {
-        sprintsEl.textContent   = s.sprints;
-        speedEl.textContent     = s.speed;
+        sprintsEl.textContent = s.sprints;
+        speedEl.textContent   = s.speed;
         sprintsEl.style.opacity = '1';
         speedEl.style.opacity   = '1';
       }, 300);
@@ -289,8 +346,43 @@ if (form) {
 
   setInterval(() => {
     setIdx = (setIdx + 1) % SPRINT_SETS.length;
-    const s = SPRINT_SETS[setIdx];
-    drawSet(s);
-    updateGpsWidgets(s);
+    drawSet(SPRINT_SETS[setIdx]);
+    updateGpsWidgets(SPRINT_SETS[setIdx]);
   }, 5000);
+})();
+
+// ============================================================
+// PITCH LINES — draw-on animation
+// ============================================================
+(function initPitchLines() {
+  function elemLen(el) {
+    const tag = el.tagName.toLowerCase();
+    if (tag === 'path') { try { return el.getTotalLength(); } catch(e) {} }
+    if (tag === 'line') {
+      const dx = parseFloat(el.getAttribute('x2')) - parseFloat(el.getAttribute('x1'));
+      const dy = parseFloat(el.getAttribute('y2')) - parseFloat(el.getAttribute('y1'));
+      return Math.sqrt(dx * dx + dy * dy);
+    }
+    if (tag === 'rect') return 2 * (parseFloat(el.getAttribute('width')) + parseFloat(el.getAttribute('height')));
+    if (tag === 'circle') return 2 * Math.PI * parseFloat(el.getAttribute('r'));
+    return 200;
+  }
+
+  const g = document.getElementById('pitch-lines-g');
+  if (!g) return;
+
+  const els = Array.from(g.children).filter(el => el.getAttribute('stroke') !== 'none');
+
+  els.forEach(el => {
+    const len = elemLen(el);
+    el.style.strokeDasharray  = len;
+    el.style.strokeDashoffset = len;
+  });
+
+  requestAnimationFrame(() => requestAnimationFrame(() => {
+    els.forEach((el, i) => {
+      el.style.transition = `stroke-dashoffset ${0.7 + i * 0.08}s ease ${i * 0.07}s`;
+      el.style.strokeDashoffset = '0';
+    });
+  }));
 })();

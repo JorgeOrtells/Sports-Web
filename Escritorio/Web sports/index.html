@@ -61,30 +61,13 @@
       <div class="hero-right reveal-fade" data-delay="300">
         <div class="field-wrap">
           <svg class="pitch-svg" viewBox="0 0 520 340" xmlns="http://www.w3.org/2000/svg"
-            aria-label="Mapa de calor de rendimiento en campo de fútbol">
-            <defs>
-              <radialGradient id="hg1">
-                <stop offset="0%"   stop-color="#FF4500" stop-opacity="0.92"/>
-                <stop offset="55%"  stop-color="#FF5722" stop-opacity="0.48"/>
-                <stop offset="100%" stop-color="#FF5722" stop-opacity="0"/>
-              </radialGradient>
-              <radialGradient id="hg2">
-                <stop offset="0%"   stop-color="#FF9800" stop-opacity="0.85"/>
-                <stop offset="55%"  stop-color="#FF9800" stop-opacity="0.38"/>
-                <stop offset="100%" stop-color="#FF9800" stop-opacity="0"/>
-              </radialGradient>
-              <radialGradient id="hg3">
-                <stop offset="0%"   stop-color="#FFCA28" stop-opacity="0.72"/>
-                <stop offset="55%"  stop-color="#FFC107" stop-opacity="0.28"/>
-                <stop offset="100%" stop-color="#FFC107" stop-opacity="0"/>
-              </radialGradient>
-            </defs>
+            aria-label="Campo de fútbol con líneas de sprint GPS">
 
             <!-- Fondo azul marino -->
             <rect width="520" height="340" rx="6" fill="#0A1628"/>
 
             <!-- Líneas del campo -->
-            <g stroke="rgba(130,180,255,0.22)" stroke-width="1.2" fill="none">
+            <g id="pitch-lines-g" stroke="rgba(130,180,255,0.22)" stroke-width="1.2" fill="none">
               <rect x="8" y="8" width="504" height="324" rx="2"/>
               <line x1="260" y1="8" x2="260" y2="332"/>
               <circle cx="260" cy="170" r="50"/>
@@ -105,36 +88,20 @@
 
             <!-- Líneas de sprint GPS animadas -->
             <g id="sprint-lines" fill="none" stroke-linecap="round">
-              <!-- Jugador 1 — sprint diagonal derecho -->
               <path id="sp1" d="M60,200 Q160,160 300,155 T480,130"
-                stroke="#FF5722" stroke-width="2.2" stroke-dasharray="8 5" opacity="0.85"/>
-              <circle id="sp1-dot" cx="480" cy="130" r="4.5" fill="#FF5722"/>
-              <!-- Jugador 2 — carrera por banda derecha -->
+                stroke="#FF5722" stroke-width="2.2" opacity="0.85"/>
               <path id="sp2" d="M70,280 Q200,270 340,240 T500,210"
-                stroke="#FF9800" stroke-width="2" stroke-dasharray="8 5" opacity="0.75"/>
-              <circle id="sp2-dot" cx="500" cy="210" r="4" fill="#FF9800"/>
-              <!-- Jugador 3 — diagonal al área -->
+                stroke="#FF9800" stroke-width="2" opacity="0.75"/>
               <path id="sp3" d="M200,310 Q310,260 400,200 T470,165"
-                stroke="#FF5722" stroke-width="1.8" stroke-dasharray="8 5" opacity="0.7"/>
-              <circle id="sp3-dot" cx="470" cy="165" r="3.5" fill="#FF5722"/>
-              <!-- Jugador 4 — centrocampista, pase y desmarcada -->
+                stroke="#FF5722" stroke-width="1.8" opacity="0.7"/>
               <path id="sp4" d="M130,170 Q220,140 310,145 T430,120"
-                stroke="#FFCA28" stroke-width="1.6" stroke-dasharray="6 5" opacity="0.65"/>
-              <circle id="sp4-dot" cx="430" cy="120" r="3.5" fill="#FFCA28"/>
-              <!-- Jugador 5 — segunda línea -->
+                stroke="#FFCA28" stroke-width="1.6" opacity="0.65"/>
               <path id="sp5" d="M100,120 Q230,100 330,110 T460,90"
-                stroke="#FF9800" stroke-width="1.5" stroke-dasharray="6 5" opacity="0.55"/>
-              <circle id="sp5-dot" cx="460" cy="90" r="3" fill="#FF9800"/>
-              <!-- Jugador 6 — repliegue desde media -->
+                stroke="#FF9800" stroke-width="1.5" opacity="0.55"/>
               <path id="sp6" d="M400,170 Q310,190 200,195 T80,210"
-                stroke="#FF7043" stroke-width="1.6" stroke-dasharray="5 6" opacity="0.5"/>
-              <circle id="sp6-dot" cx="80" cy="210" r="3" fill="#FF7043"/>
+                stroke="#FF7043" stroke-width="1.6" opacity="0.5"/>
             </g>
 
-            <!-- Puntos de calor suaves en zonas de actividad alta -->
-            <ellipse cx="455" cy="148" rx="50" ry="38" fill="url(#hg1)" opacity="0.45"/>
-            <ellipse cx="340" cy="160" rx="42" ry="32" fill="url(#hg2)" opacity="0.35"/>
-            <ellipse cx="200" cy="240" rx="38" ry="28" fill="url(#hg3)" opacity="0.28"/>
           </svg>
 
           <div class="field-label">
@@ -221,7 +188,7 @@
       <!-- Servicio 1: GPS -->
       <div class="service-block reveal-line orange-border-hover">
         <div class="sb-left">
-          <span class="sb-num orange-text">01</span>
+          <span class="sb-num accent">01</span>
           <div class="sb-title-group">
             <h3>Seguimiento GPS de Élite</h3>
             <span class="sb-subtitle">Player Tracking Technology</span>
@@ -254,7 +221,7 @@
       <!-- Servicio 2: Fuerza -->
       <div class="service-block reveal-line gold-block gold-border-hover">
         <div class="sb-left">
-          <span class="sb-num gold-text">02</span>
+          <span class="sb-num gold">02</span>
           <div class="sb-title-group">
             <h3>Entrenamiento de Fuerza Especializado</h3>
             <span class="sb-subtitle">Strength &amp; Conditioning for Football</span>
@@ -303,12 +270,12 @@
         <div class="tm-photo-col">
           <div class="tm-photo-frame orange-frame">
             <img src="Jorge.png"
-              alt="Jorge, Preparador Físico y Analista GPS Principal" />
+              alt="Jorge Ortells, Preparador Físico y Analista GPS Principal" />
           </div>
         </div>
         <div class="tm-info-col">
           <p class="tm-role orange-text">Preparador Físico & Analista GPS Principal</p>
-          <h3 class="tm-name">Jorge</h3>
+          <h3 class="tm-name">Jorge Ortells</h3>
           <p class="tm-bio">Máster en Rendimiento Deportivo (INEF). Certificado avanzado en tecnología Catapult Sports.
             Especialista en optimizar la carga de entrenamiento y competición en el fútbol profesional con más de 8 años
             de experiencia en clubs de LALIGA.</p>
@@ -325,12 +292,12 @@
         <div class="tm-photo-col">
           <div class="tm-photo-frame gold-frame">
             <img src="Carlos.png"
-              alt="Carlos, Especialista en Fuerza y Acondicionamiento" />
+              alt="Carlos Navarro, Especialista en Fuerza y Acondicionamiento" />
           </div>
         </div>
         <div class="tm-info-col">
           <p class="tm-role gold-text">Especialista en Fuerza & Acondicionamiento (S&C)</p>
-          <h3 class="tm-name">Carlos</h3>
+          <h3 class="tm-name">Carlos Navarro</h3>
           <p class="tm-bio">Certificado NSCA-CSCS. Grado en Ciencias del Deporte (UPM). Experto en el desarrollo de
             potencia explosiva y periodización táctica integrada. Centrado en la aplicación práctica de la fuerza para
             la mejora del rendimiento en el campo y la reducción del riesgo de lesiones.</p>

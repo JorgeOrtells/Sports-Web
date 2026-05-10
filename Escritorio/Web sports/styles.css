@@ -613,6 +613,11 @@ em {
   to { stroke-dashoffset: 0; }
 }
 
+@keyframes trail-move {
+  from { stroke-dashoffset: var(--trail-start); }
+  to   { stroke-dashoffset: 0; }
+}
+
 @keyframes sprintPulse {
   0%, 100% { opacity: var(--op, 0.8); }
   50%       { opacity: 0.35; }
@@ -836,6 +841,14 @@ em {
 
 .service-block.visible .sb-num.accent {
   color: var(--red);
+}
+
+.sb-num.gold {
+  color: var(--gold);
+}
+
+.service-block.visible .sb-num.gold {
+  color: var(--gold);
 }
 
 .sb-title-group h3 {
