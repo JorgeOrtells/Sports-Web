@@ -7,6 +7,6 @@
 !script.js
 !.gitignore
 
-# Ignorar carpeta de imágenes (pueden tener info personal)
-# Descomenta si quieres incluirla: !img/
-img/
+# Imágenes del equipo
+!Carlos.png
+!Jorge.png
